@@ -1,6 +1,7 @@
 //Reference Scriptfile
 //Intended exclusively for auto-complete in your IDE, not for execution
 
+/* Extended for Grayjay native platform comments on 2026-07-30; see MODIFICATIONS.md. */
 declare class ScriptException extends Error {
     constructor(type: string, msg: string);
 }
@@ -190,10 +191,31 @@ declare interface CommentDef {
     rating: IRating,
     date: long,
     replyCount: int,
-    context: any
+    context: Map<string>,
+    id?: string,
+    isOwnedByUser?: boolean,
+    isEdited?: boolean,
+    userReaction?: "NONE" | "LIKE" | "DISLIKE",
+    capabilities?: PlatformCommentCapability[],
+    visibility?: "UNKNOWN" | "ACKNOWLEDGED" | "VISIBLE" | "HELD_FOR_REVIEW" | "DELETED"
 }
 declare class Comment {
     constructor(obj: CommentDef);
+}
+
+type PlatformCommentCapability =
+    "COMMENTS_CREATE" | "COMMENTS_REPLY" | "COMMENTS_EDIT" |
+    "COMMENTS_DELETE" | "COMMENTS_LIKE" | "COMMENTS_DISLIKE";
+
+declare interface CommentMutationResult {
+    success: boolean,
+    comment?: Comment,
+    deleted?: boolean,
+    reaction?: "NONE" | "LIKE" | "DISLIKE",
+    retryable?: boolean,
+    message?: string,
+    errorCode?: string,
+    visibility?: string
 }
 
 
@@ -279,6 +301,14 @@ interface Source {
     getComments(url: string): CommentPager;
     //Optional
     getSubComments(comment: Comment): CommentPager;
+
+    createComment?(contentUrl: string, message: string): CommentMutationResult;
+    replyToComment?(comment: Comment, message: string): CommentMutationResult;
+    editComment?(comment: Comment, message: string): CommentMutationResult;
+    deleteComment?(comment: Comment): CommentMutationResult;
+    likeComment?(comment: Comment, enabled: boolean): CommentMutationResult;
+    dislikeComment?(comment: Comment, enabled: boolean): CommentMutationResult;
+    getCommentingIdentity?(): string;
 
     //Optional
     getUserSubscriptions(): string[];

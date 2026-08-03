@@ -1,0 +1,13 @@
+{
+  "name": "grayjay-youtube-native-platform-comments",
+  "private": true,
+  "scripts": {
+    "build": "node scripts/embed-modules.mjs",
+    "check:generated": "node scripts/check-embedded-modules.mjs",
+    "test": "node --test tests/*.test.js",
+    "verify": "npm run check:generated && npm test"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
