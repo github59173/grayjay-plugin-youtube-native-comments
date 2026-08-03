@@ -1,0 +1,89 @@
+{
+  "commentRenderer": {
+    "commentId": "SANITIZED_MOBILE_LIKE_BUTTON_COMMENT",
+    "voteStatus": "LIKE",
+    "authorEndpoint": {
+      "browseEndpoint": {
+        "browseId": "SANITIZED_CURRENT_CHANNEL"
+      }
+    },
+    "actionMenu": {
+      "menuRenderer": {
+        "items": [
+          {
+            "buttonRenderer": {
+              "text": {"runs": [{"text": "Reply"}]},
+              "serviceEndpoint": {
+                "createCommentReplyEndpoint": {
+                  "createCommentReplyParams": "SANITIZED_MOBILE_REPLY_PARAMS"
+                }
+              }
+            }
+          },
+          {
+            "likeButtonRenderer": {
+              "likeStatus": "LIKE",
+              "likesAllowed": true,
+              "hideDislikeButton": false,
+              "serviceEndpoints": [
+                {
+                  "commandMetadata": {
+                    "webCommandMetadata": {
+                      "apiUrl": "/youtubei/v1/comment/perform_comment_action"
+                    }
+                  },
+                  "performCommentActionEndpoint": {
+                    "status": "LIKE",
+                    "action": "SANITIZED_MOBILE_LIKE_ACTION"
+                  }
+                },
+                {
+                  "commandMetadata": {
+                    "webCommandMetadata": {
+                      "apiUrl": "/youtubei/v1/comment/perform_comment_action"
+                    }
+                  },
+                  "performCommentActionEndpoint": {
+                    "status": "DISLIKE",
+                    "action": "SANITIZED_MOBILE_DISLIKE_ACTION"
+                  }
+                },
+                {
+                  "commandMetadata": {
+                    "webCommandMetadata": {
+                      "apiUrl": "/youtubei/v1/comment/perform_comment_action"
+                    }
+                  },
+                  "performCommentActionEndpoint": {
+                    "status": "INDIFFERENT",
+                    "action": "SANITIZED_MOBILE_INDIFFERENT_ACTION"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "menuServiceItemRenderer": {
+              "text": {"runs": [{"text": "Edit"}]},
+              "serviceEndpoint": {
+                "updateCommentEndpoint": {
+                  "updateCommentParams": "SANITIZED_MOBILE_EDIT_PARAMS"
+                }
+              }
+            }
+          },
+          {
+            "menuServiceItemRenderer": {
+              "text": {"runs": [{"text": "Delete"}]},
+              "serviceEndpoint": {
+                "performCommentActionEndpoint": {
+                  "action": "SANITIZED_MOBILE_DELETE_ACTION"
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

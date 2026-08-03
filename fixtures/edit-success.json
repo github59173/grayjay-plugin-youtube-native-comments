@@ -1,0 +1,1 @@
+{"frameworkUpdates":{"entityBatchUpdate":{"mutations":[{"payload":{"commentEntityPayload":{"properties":{"commentId":"SANITIZED_EDITED","content":{"content":"Edited fixture"},"isEdited":true}}}}]}}}

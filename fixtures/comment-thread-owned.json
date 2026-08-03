@@ -1,0 +1,27 @@
+{
+  "commentRenderer": {
+    "commentId": "SANITIZED_COMMENT_OWNED",
+    "isCurrentUser": true,
+    "contentText": {"simpleText": "Sanitized owned comment"},
+    "replyButton": {"tooltip": "Reply", "serviceEndpoint": {
+      "commandMetadata": {"webCommandMetadata": {"apiUrl": "/youtubei/v1/comment/create_comment_reply"}},
+      "createCommentReplyEndpoint": {"createCommentReplyParams": "SANITIZED_REPLY_PARAMS"}
+    }},
+    "actionMenu": {"items": [
+      {"text": "Edit", "serviceEndpoint": {
+        "commandMetadata": {"webCommandMetadata": {"apiUrl": "/youtubei/v1/comment/update_comment"}},
+        "updateCommentEndpoint": {"updateCommentParams": "SANITIZED_EDIT_PARAMS"}
+      }},
+      {"text": "Delete", "serviceEndpoint": {
+        "commandMetadata": {"webCommandMetadata": {"apiUrl": "/youtubei/v1/comment/perform_comment_action"}},
+        "performCommentActionEndpoint": {"action": "SANITIZED_DELETE_ACTION"}
+      }}
+    ]},
+    "toolbar": {
+      "like": {"tooltip": "Like", "serviceEndpoint": {"performCommentActionEndpoint": {"action": "SANITIZED_LIKE_ACTION"}}},
+      "unlike": {"tooltip": "Unlike", "serviceEndpoint": {"performCommentActionEndpoint": {"action": "SANITIZED_UNLIKE_ACTION"}}},
+      "dislike": {"tooltip": "Dislike", "serviceEndpoint": {"performCommentActionEndpoint": {"action": "SANITIZED_DISLIKE_ACTION"}}},
+      "undislike": {"tooltip": "Remove dislike", "serviceEndpoint": {"performCommentActionEndpoint": {"action": "SANITIZED_UNDISLIKE_ACTION"}}}
+    }
+  }
+}

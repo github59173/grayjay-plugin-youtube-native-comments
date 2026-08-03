@@ -1,0 +1,80 @@
+{
+  "parent": {
+    "commentThreadRenderer": {
+      "commentViewModel": {
+        "commentViewModel": {
+          "commentKey": "ENTITY_COMMENT",
+          "toolbarSurfaceKey": "ENTITY_TOOLBAR_SURFACE"
+        }
+      }
+    }
+  },
+  "mutations": [
+    {
+      "entityKey": "ENTITY_COMMENT",
+      "payload": {
+        "commentEntityPayload": {
+          "properties": {
+            "commentId": "SANITIZED_ENTITY_COMMENT",
+            "toolbarStateKey": "ENTITY_TOOLBAR_STATE"
+          },
+          "author": {
+            "isCurrentUser": true
+          }
+        }
+      }
+    },
+    {
+      "entityKey": "ENTITY_TOOLBAR_SURFACE",
+      "payload": {
+        "engagementToolbarSurfaceEntityPayload": {
+          "likeCommand": {
+            "innertubeCommand": {
+              "commandMetadata": {"webCommandMetadata": {"apiUrl": "/youtubei/v1/comment/perform_comment_action"}},
+              "performCommentActionEndpoint": {"action": "SANITIZED_LIKE_ACTION"}
+            }
+          },
+          "unlikeCommand": {
+            "innertubeCommand": {
+              "performCommentActionEndpoint": {"action": "SANITIZED_UNLIKE_ACTION"}
+            }
+          },
+          "dislikeCommand": {
+            "innertubeCommand": {
+              "performCommentActionEndpoint": {"action": "SANITIZED_DISLIKE_ACTION"}
+            }
+          },
+          "undislikeCommand": {
+            "innertubeCommand": {
+              "performCommentActionEndpoint": {"action": "SANITIZED_UNDISLIKE_ACTION"}
+            }
+          },
+          "replyCommand": {
+            "innertubeCommand": {
+              "commandMetadata": {"webCommandMetadata": {"apiUrl": "/youtubei/v1/comment/create_comment_reply_dialog"}},
+              "createCommentReplyDialogEndpoint": {"createCommentReplyParams": "SANITIZED_REPLY_DIALOG_PARAMS"}
+            }
+          },
+          "editCommand": {
+            "innertubeCommand": {
+              "updateCommentEndpoint": {"updateCommentParams": "SANITIZED_EDIT_PARAMS"}
+            }
+          },
+          "deleteCommand": {
+            "innertubeCommand": {
+              "deleteCommentEndpoint": {"deleteCommentParams": "SANITIZED_DELETE_PARAMS"}
+            }
+          }
+        }
+      }
+    },
+    {
+      "entityKey": "ENTITY_TOOLBAR_STATE",
+      "payload": {
+        "engagementToolbarStateEntityPayload": {
+          "likeState": "LIKE"
+        }
+      }
+    }
+  ]
+}

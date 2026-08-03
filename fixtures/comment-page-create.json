@@ -1,0 +1,15 @@
+{
+  "contents": [{
+    "commentSimpleboxRenderer": {
+      "submitButton": {
+        "buttonRenderer": {
+          "text": "Comment",
+          "serviceEndpoint": {
+            "commandMetadata": {"webCommandMetadata": {"apiUrl": "/youtubei/v1/comment/create_comment"}},
+            "createCommentEndpoint": {"createCommentParams": "SANITIZED_CREATE_PARAMS"}
+          }
+        }
+      }
+    }
+  }]
+}

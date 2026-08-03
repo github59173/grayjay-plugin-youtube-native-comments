@@ -1,6 +1,6 @@
 const test = require("node:test");
 const assert = require("node:assert/strict");
-const {source, comments} = require("../../fixtures/fake-platform-plugin.js");
+const {source, comments} = require("../fixtures/fake-platform-plugin.js");
 
 test("fake source implements all six optional mutation methods", () => {
   for (const method of ["createComment", "replyToComment", "editComment", "deleteComment", "likeComment", "dislikeComment"])

@@ -34,6 +34,8 @@ credential store.
 - `video_reactions.js` – reviewable video reaction module;
 - `scripts/embed-modules.mjs` – embeds both modules in the installable script;
 - `tests/` – deterministic, sanitized Node tests;
+- `fixtures/` – self-contained sanitized responses and a fake source used by
+  tests; no parent development workspace is required;
 - `YoutubeConfig.json` and `YoutubeUnstableConfig.json` – official source
   identities with a source accent color added.
 

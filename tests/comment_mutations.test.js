@@ -4,7 +4,7 @@ const fs = require("node:fs");
 const path = require("node:path");
 
 const mutations = require("../comment_mutations.js");
-const fixtureRoot = path.resolve(__dirname, "../../fixtures");
+const fixtureRoot = path.resolve(__dirname, "../fixtures");
 const fixture = name => JSON.parse(fs.readFileSync(path.join(fixtureRoot, name), "utf8"));
 
 test("extracts all owned-comment capabilities without credentials", () => {

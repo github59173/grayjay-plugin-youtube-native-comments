@@ -1,0 +1,82 @@
+{
+  "commentRenderer": {
+    "commentId": "SANITIZED_MOBILE_COMMENT_OWNED",
+    "voteStatus": "LIKE",
+    "authorEndpoint": {
+      "browseEndpoint": {
+        "browseId": "SANITIZED_CURRENT_CHANNEL"
+      }
+    },
+    "actionButtons": {
+      "commentActionButtonsRenderer": {
+        "likeButton": {
+          "toggleButtonRenderer": {
+            "defaultTooltip": "Like",
+            "toggledTooltip": "Unlike",
+            "defaultServiceEndpoint": {
+              "performCommentActionEndpoint": {
+                "action": "SANITIZED_MOBILE_LIKE_ACTION"
+              }
+            },
+            "toggledServiceEndpoint": {
+              "performCommentActionEndpoint": {
+                "action": "SANITIZED_MOBILE_UNLIKE_ACTION"
+              }
+            }
+          }
+        },
+        "dislikeButton": {
+          "toggleButtonRenderer": {
+            "defaultTooltip": "Dislike",
+            "toggledTooltip": "Remove dislike",
+            "defaultServiceEndpoint": {
+              "performCommentActionEndpoint": {
+                "action": "SANITIZED_MOBILE_DISLIKE_ACTION"
+              }
+            },
+            "toggledServiceEndpoint": {
+              "performCommentActionEndpoint": {
+                "action": "SANITIZED_MOBILE_UNDISLIKE_ACTION"
+              }
+            }
+          }
+        },
+        "replyButton": {
+          "buttonRenderer": {
+            "serviceEndpoint": {
+              "createCommentReplyEndpoint": {
+                "createCommentReplyParams": "SANITIZED_MOBILE_REPLY_PARAMS"
+              }
+            }
+          }
+        }
+      }
+    },
+    "actionMenu": {
+      "menuRenderer": {
+        "items": [
+          {
+            "menuServiceItemRenderer": {
+              "text": {"runs": [{"text": "Edit"}]},
+              "serviceEndpoint": {
+                "updateCommentEndpoint": {
+                  "updateCommentParams": "SANITIZED_MOBILE_EDIT_PARAMS"
+                }
+              }
+            }
+          },
+          {
+            "menuServiceItemRenderer": {
+              "text": {"runs": [{"text": "Delete"}]},
+              "serviceEndpoint": {
+                "performCommentActionEndpoint": {
+                  "action": "SANITIZED_MOBILE_DELETE_ACTION"
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

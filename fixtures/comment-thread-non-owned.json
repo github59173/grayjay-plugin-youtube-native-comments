@@ -1,0 +1,14 @@
+{
+  "commentRenderer": {
+    "commentId": "SANITIZED_COMMENT_OTHER",
+    "isCurrentUser": false,
+    "contentText": {"simpleText": "Sanitized public comment"},
+    "replyButton": {"tooltip": "Reply", "serviceEndpoint": {
+      "createCommentReplyEndpoint": {"createCommentReplyParams": "SANITIZED_REPLY_PARAMS"}
+    }},
+    "toolbar": {
+      "like": {"tooltip": "Like", "serviceEndpoint": {"performCommentActionEndpoint": {"action": "SANITIZED_LIKE_ACTION"}}},
+      "dislike": {"tooltip": "Dislike", "serviceEndpoint": {"performCommentActionEndpoint": {"action": "SANITIZED_DISLIKE_ACTION"}}}
+    }
+  }
+}
