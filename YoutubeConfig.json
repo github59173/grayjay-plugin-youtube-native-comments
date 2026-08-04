@@ -8,7 +8,7 @@
 	"repositoryUrl": "https://gitlab.futo.org/videostreaming/plugins/youtube",
 	"scriptUrl": "./YoutubeScript.js",
 
-	"version": 354,
+	"version": 355,
 	"iconUrl": "./youtube.png",
 	"id": "35ae969a-a7db-11ed-afa1-0242ac120002",
 	"accentColor": "#FF0000",
@@ -457,6 +457,9 @@
 
 
 	"changelog": {
+                "355": [
+                        "Fix: Avoid false reply-thread locks from comment text and incomplete mobile action metadata"
+                ],
                 "354": [
                         "Feature: Configurable SponsorBlock timeline colors"
                 ],

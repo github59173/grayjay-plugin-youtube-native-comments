@@ -62,7 +62,7 @@ test("marks an explicitly disabled reply thread as locked", () => {
   assert.equal(definition.context.replyLockReason, "Replies are locked");
 });
 
-test("keeps a readable MWEB reply continuation while locking reply creation", () => {
+test("keeps a readable MWEB reply continuation available when its compact toolbar omits Reply", () => {
   global.bridge = {isLoggedIn: () => true};
   try {
     const definition = mutations.ytCommentEnrichCommentDef({
@@ -94,20 +94,20 @@ test("keeps a readable MWEB reply continuation while locking reply creation", ()
 
     assert.equal(definition.replyCount, 961);
     assert.equal(definition.context.replyContinuation, "SANITIZED_LOCKED_REPLY_CONTINUATION");
-    assert.equal(definition.capabilities.includes("COMMENTS_REPLY"), false);
-    assert.equal(definition.context.replyLocked, "true");
+    assert.equal(definition.capabilities.includes("COMMENTS_REPLY"), true);
+    assert.equal(definition.context.replyLocked, undefined);
 
-    const pager = {results: [{context: {replyLocked: "true"}}], hasMore: true};
+    const pager = {results: [], hasMore: true};
     assert.deepEqual(mutations.ytCommentReplyThreadState(definition, pager), {
-      availability: "LOCKED",
-      reason: "Replies are locked"
+      availability: "AVAILABLE",
+      reason: null
     });
   } finally {
     delete global.bridge;
   }
 });
 
-test("treats a complete mobile reaction action sheet without Reply as locked", () => {
+test("does not infer a lock from a mobile reaction action sheet without Reply", () => {
   global.bridge = {isLoggedIn: () => true};
   try {
     const result = mutations.ytCommentExtractCommentActions({
@@ -144,13 +144,27 @@ test("treats a complete mobile reaction action sheet without Reply as locked", (
         }
       }
     });
-    assert.equal(result.capabilities.includes("COMMENTS_REPLY"), false);
-    assert.equal(result.replyLocked, true);
+    assert.equal(result.capabilities.includes("COMMENTS_REPLY"), true);
+    assert.equal(result.replyLocked, false);
     assert.equal(result.capabilities.includes("COMMENTS_LIKE"), true);
     assert.equal(result.capabilities.includes("COMMENTS_DISLIKE"), true);
   } finally {
     delete global.bridge;
   }
+});
+
+test("does not infer a reply lock from comment text near its accessibility reply count", () => {
+  const result = mutations.ytCommentExtractCommentActions({
+    commentId: "SANITIZED_NATURAL_LANGUAGE_LOCK_COMMENT",
+    isCurrentUser: false,
+    accessibilityData: {
+      label: "@fixture. 1 day ago. Sanders should have been locked up like 30 years ago. 504 likes. 17 replies"
+    }
+  });
+
+  assert.equal(result.capabilities.includes("COMMENTS_REPLY"), true);
+  assert.equal(result.replyLocked, false);
+  assert.equal(result.replyLockReason, null);
 });
 
 test("reports page commenting availability from inspected YouTube commands", () => {

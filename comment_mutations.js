@@ -357,7 +357,6 @@ function ytCommentFindMobileLikeButtonCommands(root) {
 // should mark a thread as locked; command absence alone is not enough.
 function ytCommentFindReplyLock(root) {
     const seen = new Set();
-    const lockPattern = /(?:repl(?:y|ies|ying).{0,40}(?:disabled|locked|turned off|not available)|(?:disabled|locked|turned off|not available).{0,40}repl(?:y|ies|ying))/i;
 
     function visit(value, path) {
         if (!value || typeof value !== "object" || seen.has(value))
@@ -380,17 +379,6 @@ function ytCommentFindReplyLock(root) {
                 if (path.toLowerCase().includes("reply") && normalizedKey === "enabled" && child === false)
                     return "Replies are locked";
             }
-
-            const label = ytCommentSafeStringify({
-                text: value.text,
-                title: value.title,
-                message: value.message,
-                tooltip: value.tooltip,
-                accessibility: value.accessibility,
-                accessibilityData: value.accessibilityData
-            });
-            if (lockPattern.test(label))
-                return "Replies are locked";
         }
 
         for (const key of Object.keys(value)) {
@@ -402,33 +390,6 @@ function ytCommentFindReplyLock(root) {
     }
 
     return visit(root, "root");
-}
-
-// MWEB represents the comment action sheet as a complete toolbar surface.
-// A signed-in surface containing reaction/menu actions but no Reply action is
-// not an incomplete parser result: it is how YouTube represents a readable
-// thread whose reply creation is locked. Reply continuations remain valid.
-function ytCommentHasCompleteReplyActionSurface(root) {
-    const surface = root?.engagementToolbarSurfaceEntityPayload ??
-        ytCommentFindFirstPayload(root, "engagementToolbarSurfaceEntityPayload");
-    if (surface && typeof surface === "object") {
-        const keys = Object.keys(surface);
-        const commands = ytCommentCollectCommands(surface);
-        if (keys.some(key => /(?:like|dislike|menu|report|reply|edit|delete)command/i.test(key)) ||
-            commands.some(command => command.endpointKey === "performCommentActionEndpoint" ||
-                command.endpointKey === "flagEndpoint" ||
-                command.endpointKey === "reportEndpoint")) {
-            return true;
-        }
-    }
-
-    // Legacy renderers expose the same complete surface through replyButton
-    // plus toolbar/actionMenu fields instead of an entity payload.
-    if (root && typeof root === "object" &&
-        Object.prototype.hasOwnProperty.call(root, "replyButton")) {
-        return true;
-    }
-    return false;
 }
 
 function ytCommentSerializeCommand(command) {
@@ -847,14 +808,11 @@ function ytCommentExtractCommentActions(renderer) {
     }
 
     const commentId = ytCommentFirstString(entity?.commentId, entity?.properties?.commentId, renderer?.entityKey);
-    const canEvaluateReplyAvailability = typeof bridge === "undefined" ||
-        typeof bridge.isLoggedIn !== "function" || bridge.isLoggedIn();
-    const completeReplyActionSurface = ytCommentHasCompleteReplyActionSurface(renderer) ||
-        Boolean(mobileMenuLikeToggle && mobileMenuDislikeToggle);
-    const replyLockReason = ytCommentFindReplyLock(renderer) ??
-        (canEvaluateReplyAvailability && !reply && completeReplyActionSurface
-            ? "Replies are locked"
-            : null);
+    // Reply commands are frequently omitted from compact MWEB batches and
+    // loaded only after opening the action sheet or refreshing the highlighted
+    // comment. Absence is therefore UNKNOWN, never proof of a lock. Only
+    // explicit structured disabled state may set replyLocked.
+    const replyLockReason = ytCommentFindReplyLock(renderer);
     const replyLocked = Boolean(replyLockReason);
     const ownerFlags = [entity?.isCurrentUser, entity?.author?.isCurrentUser, entity?.properties?.isCurrentUser]
         .filter(value => typeof value === "boolean");
@@ -2151,7 +2109,6 @@ if (typeof module !== "undefined" && module.exports) {
         ytCommentFindMobileMenuReactionToggle,
         ytCommentFindMobileLikeButtonCommands,
         ytCommentFindReplyLock,
-        ytCommentHasCompleteReplyActionSurface,
         ytCommentCommentAuthorIds,
         ytCommentCurrentChannelIds,
         ytCommentMatchesCurrentChannel,
