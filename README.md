@@ -20,6 +20,8 @@ The corresponding Grayjay host implementation is maintained in the companion
 - explicit comments-disabled and reply-locked state;
 - authenticated video like/dislike state and mutation;
 - Return YouTube Dislike count availability for the host's platform row;
+- configurable SponsorBlock timeline colors and opacity for the existing seven
+  skip categories;
 - sanitized action metadata and normalized mutation failures;
 - current MWEB command extraction with limited WEB fallback for edit metadata.
 
@@ -32,7 +34,8 @@ credential store.
 - `YoutubeScript.js` – installable generated plugin script;
 - `comment_mutations.js` – reviewable comment command and transport module;
 - `video_reactions.js` – reviewable video reaction module;
-- `scripts/embed-modules.mjs` – embeds both modules in the installable script;
+- `sponsorblock.js` – SponsorBlock category colors, filtering, and chapter merging;
+- `scripts/embed-modules.mjs` – embeds all reviewable modules in the installable script;
 - `tests/` – deterministic, sanitized Node tests;
 - `fixtures/` – self-contained sanitized responses and a fake source used by
   tests; no parent development workspace is required;

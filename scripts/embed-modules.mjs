@@ -3,12 +3,14 @@ import { readFile, writeFile } from "node:fs/promises";
 const outputPath = new URL("../YoutubeScript.js", import.meta.url);
 const commentModulePath = new URL("../comment_mutations.js", import.meta.url);
 const reactionModulePath = new URL("../video_reactions.js", import.meta.url);
+const sponsorBlockModulePath = new URL("../sponsorblock.js", import.meta.url);
 const marker = "// BEGIN GENERATED NATIVE PLATFORM COMMENT MODULES";
 
 const currentOutput = await readFile(outputPath, "utf8");
 const base = currentOutput.split(marker, 1)[0].trimEnd();
 const commentModule = (await readFile(commentModulePath, "utf8")).trim();
 const reactionModule = (await readFile(reactionModulePath, "utf8")).trim();
+const sponsorBlockModule = (await readFile(sponsorBlockModulePath, "utf8")).trim();
 const generated = [
     base,
     "",
@@ -17,6 +19,8 @@ const generated = [
     commentModule,
     "",
     reactionModule,
+    "",
+    sponsorBlockModule,
     ""
 ].join("\n");
 

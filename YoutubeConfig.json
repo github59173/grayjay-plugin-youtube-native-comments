@@ -8,7 +8,7 @@
 	"repositoryUrl": "https://gitlab.futo.org/videostreaming/plugins/youtube",
 	"scriptUrl": "./YoutubeScript.js",
 
-	"version": 353,
+	"version": 354,
 	"iconUrl": "./youtube.png",
 	"id": "35ae969a-a7db-11ed-afa1-0242ac120002",
 	"accentColor": "#FF0000",
@@ -211,6 +211,7 @@
 			"type": "Dropdown",
 			"default": "1",
 			"dependency": "sponsorBlock",
+			"inlineColor": {"variable": "sponsorBlockColor_Sponsor", "default": "#B300D400", "allowAlpha": true},
 			"options": ["No skip", "Manual", "Automatic"]
 		},
 		{
@@ -220,6 +221,7 @@
 			"type": "Dropdown",
 			"default": "0",
 			"dependency": "sponsorBlock",
+			"inlineColor": {"variable": "sponsorBlockColor_Intro", "default": "#B300FFFF", "allowAlpha": true},
 			"options": ["No skip", "Manual", "Automatic"]
 		},
 		{
@@ -229,6 +231,7 @@
 			"type": "Dropdown",
 			"default": "0",
 			"dependency": "sponsorBlock",
+			"inlineColor": {"variable": "sponsorBlockColor_Outro", "default": "#B30202ED", "allowAlpha": true},
 			"options": ["No skip", "Manual", "Automatic"]
 		},
 		{
@@ -238,6 +241,7 @@
 			"type": "Dropdown",
 			"default": "0",
 			"dependency": "sponsorBlock",
+			"inlineColor": {"variable": "sponsorBlockColor_Self", "default": "#B3FFFF00", "allowAlpha": true},
 			"options": ["No skip", "Manual", "Automatic"]
 		},
 		{
@@ -247,6 +251,7 @@
 			"type": "Dropdown",
 			"default": "0",
 			"dependency": "sponsorBlock",
+			"inlineColor": {"variable": "sponsorBlockColor_Offtopic", "default": "#B3FF9900", "allowAlpha": true},
 			"options": ["No skip", "Manual", "Automatic"]
 		},
 		{
@@ -256,6 +261,7 @@
 			"type": "Dropdown",
 			"default": "0",
 			"dependency": "sponsorBlock",
+			"inlineColor": {"variable": "sponsorBlockColor_Preview", "default": "#B3008FD6", "allowAlpha": true},
 			"options": ["No skip", "Manual", "Automatic"]
 		},
 		{
@@ -265,6 +271,7 @@
 			"type": "Dropdown",
 			"default": "0",
 			"dependency": "sponsorBlock",
+			"inlineColor": {"variable": "sponsorBlockColor_Filler", "default": "#E67300FF", "allowAlpha": true},
 			"options": ["No skip", "Manual", "Automatic"]
 		},
 		{
@@ -450,6 +457,9 @@
 
 
 	"changelog": {
+                "354": [
+                        "Feature: Configurable SponsorBlock timeline colors"
+                ],
                 "353": [
                         "Feature: Native UMP"
                 ],
